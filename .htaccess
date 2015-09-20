@@ -1,0 +1,18 @@
+## Can be commented out if causes errors.
+Options +FollowSymLinks
+
+## Mod_rewrite in use.
+
+RewriteEngine On
+
+##if the application is installed to a subfolder
+##appropriately set the RewriteBase location relative to the domain root
+##suggestions provided below
+
+RewriteBase /
+#RewriteBase /ams/
+#RewriteBase /applications/ams/
+
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+RewriteRule ^([^/][a-zA-Z0-9_\/-]*)$ index.php?a=$1 [QSA,L]
