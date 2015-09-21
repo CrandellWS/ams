@@ -52,16 +52,12 @@
     $aReg->template = new template($aReg);
 
 
-if(isset($_SESSION['userTypeID'])){
-    if(intval($_SESSION['userTypeID']) === 5){
-        die();
-    }
-
-    if(stripos($_SESSION['username'], 'DISPATCH') !== false){
-        die('This account was not intended for human use. email dataentry@aerotekllc.com with any questions. Thank you.');
-    }
-
-}
+//This could be used to prevent login access for specfic userTypes
+// if(isset($_SESSION['userTypeID'])){
+//     if(intval($_SESSION['userTypeID']) === 5){
+//         die();
+//     }
+// }
 
     /**
      * load the controller
