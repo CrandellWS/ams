@@ -313,6 +313,7 @@ class amsAuth{
             echo "Please Report General Error: <br>".$e->getMessage();
           }
         } elseif($userSessionId === $results['userSessionId']) {
+          session_regenerate_id(true);
           $values = array(':user_id' => $user_id, ':userSessionId' => session_id());
           if(isset($_SESSION['form_key']) && isset($_SESSION['old_form_key'])){
             $nFormKey = $_SESSION['form_key'];
