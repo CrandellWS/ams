@@ -1,5 +1,13 @@
 <?php
 
+/**
+ *@todo get AMS username, email, and password to be used as part of installation
+ * Current AMS user info
+ * username = user
+ * email = user@www.localhost
+ * password = apass
+ */
+
 if (isset($_POST['dbhost'])) {
 
   $includesDir = str_replace('install', 'includes/', __DIR__);
