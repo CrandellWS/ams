@@ -44,7 +44,9 @@ class amsConfig {
     public $DB_PASSWORD = 'password1';
     public $DB_DSN;
 
+
     //Template configurations
+    //Largly unused at this point
     public $ADMIN_TEMPLATE = 'base';
     public $SITE_TEMPLATE = 'base';
     public $TEMPLATE_PATH = 'templates';
@@ -57,3 +59,15 @@ class amsConfig {
         $this->DB_DSN = 'mysql:host='.$this->DB_HOST.';dbname='.$this->DB_DATABASE;
     }
 }
+
+/**
+ * AMS_SEO_URL is to be used to control the urls
+ * This should be set based on if url rewriting is used or not
+ * use ('AMS_SEO_URL', $site_path.'index.php?a='); when not utilizing Mod_rewrite
+ * or for Mod_rewrite use you might use the root like so
+ * ('AMS_SEO_URL', '/');
+ * @var string
+*/
+//define ('AMS_SEO_URL', $protocol.$domain.'/ams/');
+define ('AMS_SEO_URL', AMS_DOMAIN.'/');
+define ('AMS_SITE_NAME', 'Company Name');

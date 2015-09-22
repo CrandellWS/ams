@@ -41,34 +41,20 @@ if (!function_exists('array_column')) {
 }
 
 ob_start();
-    $domain = $_SERVER['HTTP_HOST'];
-    $docRoot = realpath($_SERVER['DOCUMENT_ROOT']);
-    $dirRoot = __DIR__;
-    /**
-     * @todo convert ssl to configurable across whole application
-     */
-    $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
-    $urlDir = str_replace('includes', '',str_replace($docRoot, '', $dirRoot));
-    $urlDir = str_replace('\\', '/',$urlDir);
-    $rootDir = str_replace('includes', '',$dirRoot);
-    $site_path = $protocol.$domain.$urlDir;
-    define ('AMS_URL', $site_path);
-    define ('AMS_DOMAIN', $protocol.$domain);
-    define ('AMS_SITE_NAME', 'Company Name');
-    define ('AMS_ROOT', $rootDir);
-
-
-    /**
-     * AMS_SEO_URL is to be used to control the urls
-     * This should be set based on if url rewriting is used or not
-     * use ('AMS_SEO_URL', $site_path.'index.php?a='); when not utilizing Mod_rewrite
-     * or for Mod_rewrite use you might use the root like so
-     * ('AMS_SEO_URL', '/');
-     * @var string
-    */
-    //define ('AMS_SEO_URL', $protocol.$domain.'/ams/');
-    define ('AMS_SEO_URL', $protocol.$domain.'/');
-
+$domain = $_SERVER['HTTP_HOST'];
+$docRoot = realpath($_SERVER['DOCUMENT_ROOT']);
+$dirRoot = __DIR__;
+/**
+ * @todo convert ssl to configurable across whole application
+ */
+$protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+$urlDir = str_replace('includes', '',str_replace($docRoot, '', $dirRoot));
+$urlDir = str_replace('\\', '/',$urlDir);
+$rootDir = str_replace('includes', '',$dirRoot);
+$site_path = $protocol.$domain.$urlDir;
+define ('AMS_URL', $site_path);
+define ('AMS_DOMAIN', $protocol.$domain);
+define ('AMS_ROOT', $rootDir);
 /**
  * @todo doc each define
  */
