@@ -1,61 +1,103 @@
 <?php
 
-	error_reporting(E_ALL);
-	ini_set('display_errors','On');
+if (isset($_POST['dbhost'])) {
 
-     $DB_HOST = 'localhost';
-     $DB_DATABASE = 'sample1';
-     $DB_USERNAME = 'user1';
-     $DB_PASSWORD = 'password1';
+  $includesDir = str_replace('install', 'includes/', __DIR__);
+  $amsConfigSource='<?php
+    defined(\'_AMSgo\') or die;
 
-    $DB_DSN = 'mysql:host='.$DB_HOST.';dbname='.$DB_DATABASE;
+    class amsConfig {
 
+        public $DB_HOST = \''.$_POST['dbhost'].'\';
+        public $DB_DATABASE = \''.$_POST['dbname'].'\';
+        public $DB_USERNAME = \''.$_POST['dbuser'].'\';
+        public $DB_PASSWORD = \''.$_POST['dbpass'].'\';
+        public $DB_DSN;
 
-function installDB($DB_DSN, $DB_USERNAME,$DB_PASSWORD) {
-try{
-    // Insert the tables
-    $conn = new PDO( $DB_DSN, $DB_USERNAME, $DB_PASSWORD );
-    $conn-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = file_get_contents('install.sql');
-    $st = $conn->prepare ( $sql );
-    $installed = $st->execute();
-    } catch (PDOException $e) {
-        die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
-      return "$pd DataBase Error:<br>".$e->getMessage().'</p>';
-    } catch (Exception $e) {
-        die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
-      return "$pd General Error: <br>".$e->getMessage().'</p>';
+        //Template configurations
+        //Largly unused at this point
+        public $ADMIN_TEMPLATE = \'base\';
+        public $SITE_TEMPLATE = \'base\';
+        public $TEMPLATE_PATH = \'templates\';
+
+        function __construct() {
+            $this->DB_DSN = \'mysql:host=\'.$this->DB_HOST.\';dbname=\'.$this->DB_DATABASE;
+        }
     }
-    $conn = null;
-    if($installed == 1){
-        echo 'well not really a installer yet but database has been wiped and redone';
-    } else {
-        echo 'better get Houston on the line...';
-    }
-    return $installed;
+
+    define (\'AMS_SEO_URL\', AMS_DOMAIN.\''.$_POST['seovalue'].'\');
+    define (\'AMS_SITE_NAME\', \''.$_POST['sitename'].'\');
+    ';
+
+  $configFile = $includesDir . 'config.php';
+
+  $handle = fopen($configFile, 'w');
+  if (fwrite($handle, $amsConfigSource) === false) {
+    echo "Can not write to (".$configFile.")";
+  } else {
+    echo "Succesfully Wrote to (".$configFile.")";
+    fclose($handle);
+    // unlink(__FILE__);
   }
-print_r(installDB($DB_DSN, $DB_USERNAME,$DB_PASSWORD));
+
+       $DB_HOST = $_POST['dbhost'];
+       $DB_DATABASE = $_POST['dbname'];
+       $DB_USERNAME = $_POST['dbuser'];
+       $DB_PASSWORD = $_POST['dbpass'];
+
+      $DB_DSN = 'mysql:host='.$DB_HOST.';dbname='.$DB_DATABASE;
 
 
-    echo "<-|<br><br><br>";
+  function installDB($DB_DSN, $DB_USERNAME,$DB_PASSWORD) {
+  try{
+      // Insert the tables
+      $conn = new PDO( $DB_DSN, $DB_USERNAME, $DB_PASSWORD );
+      $conn-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = file_get_contents('install.sql');
+      $st = $conn->prepare ( $sql );
+      $installed = $st->execute();
+      } catch (PDOException $e) {
+          die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
+        return "$pd DataBase Error:<br>".$e->getMessage().'</p>';
+      } catch (Exception $e) {
+          die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
+        return "$pd General Error: <br>".$e->getMessage().'</p>';
+      }
+      $conn = null;
+      if($installed == 1){
+          echo 'well not really a installer yet but database has been wiped and redone';
+      } else {
+          echo 'better get Houston on the line...';
+					exit();
+      }
+      return $installed;
+    }
+  print_r(installDB($DB_DSN, $DB_USERNAME,$DB_PASSWORD));
 
-    // Insert the tables
-    $conn = new PDO( $DB_DSN, $DB_USERNAME, $DB_PASSWORD );
-    $sql = 'SELECT assignedName FROM assignedName';
+  $domain = $_SERVER['HTTP_HOST'];
+  $docRoot = realpath($_SERVER['DOCUMENT_ROOT']);
+  $dirRoot = __DIR__;
+  $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+  $urlDir = str_replace('install', '',str_replace($docRoot, '', $dirRoot));
+  $urlDir = str_replace('\\', '/',$urlDir);
+  $rootDir = str_replace('install', '',$dirRoot);
+  $site_path = $protocol.$domain.$urlDir;
+  unlink('install.sql');
+  unlink(__FILE__);
+  rmdir(__DIR__);
+  header('Location: ../');
 
-    $st = $conn->prepare ( $sql );
-    $st->execute();
-       $a2n = $st->fetchAll();
-       $chkA2 = 0;
-       $an = array();
-       foreach ($a2n as $key => $value) {
-           array_push($an, $value);
-       }
+} else {
+  echo "<form name=\"Config Creation\" method=\"post\" action=\"".$PHP_SELF."\">";
+  echo "Database Host: <input type=\"text\" name=\"dbhost\" value=\"localhost\"><br>";
+  echo "Database Name: <input type=\"text\" name=\"dbname\" value=\"sample1\"><br>";
+  echo "Database User: <input type=\"text\" name=\"dbuser\" value=\"user1\"><br>";
+  echo "Database Pass: <input type=\"password\" name=\"dbpass\" value=\"password1\"><br>";
+  echo "Website Root Folder: <input type=\"text\" name=\"seovalue\" value=\"/\"><br>";
+  echo "Site Name: <input type=\"text\" name=\"sitename\" value=\"Comapny Name\"><br>";
+  echo "<input type=\"submit\" value=\"Create Config\"><input type=\"reset\" value=\"Reset\">";
+  echo "</form>";
+}
 
-       if(in_array('will', $an)){echo 'true';} else{ echo 'false';};
-        echo '<br><pre>';
-        print_r($an);
-        echo '</pre>';
 
-//unlink(install.sql);
-// unlink(__FILE__);
+?>
