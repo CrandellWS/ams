@@ -188,8 +188,7 @@ fieldset{
                 <div class="clearSpace"></div>
                 <label>SEO Root Folder:
                   <div class="inLabel">
-                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span></span>
-                      <span class="inBlockLeft">/</span>
+                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span>/</span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="seoFolder" placeholder="ams" value="">
                       </span>
@@ -200,8 +199,7 @@ fieldset{
                 <div class="clearSpace"></div>
                 <label>Template Folder:
                   <div class="inLabel">
-                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span></span>
-                      <span class="inBlockLeft">/</span>
+                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span>/<span class="amsFolder"></span>/</span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="templateFolder" placeholder="templates" value="">
                       </span>
