@@ -52,9 +52,9 @@ Class contactController Extends baseController {
     {
       //extra line ending
       $this->aReg->lastCSS = array(
-        PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/dashboard.css' />"
-        ,PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/extra.css' />"
-        //,PHP_EOL."<link rel ='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/carousel.css' />"
+        PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/dashboard.css' />"
+        ,PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/extra.css' />"
+        //,PHP_EOL."<link rel ='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/carousel.css' />"
       );
       /**
        * @see contactIndex.php
@@ -73,8 +73,8 @@ Class contactController Extends baseController {
 
         $this->aReg->template->contact_content = 'This is the contact content';
         $this->aReg->lastCSS = array(
-            PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/dashboard.css' />"
-            ,PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/extra.css' />"
+            PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/dashboard.css' />"
+            ,PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/extra.css' />"
             );
         $this->aReg->template->show('contactView');
     }

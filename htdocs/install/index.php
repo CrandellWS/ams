@@ -1,6 +1,11 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors','On');
 if (isset($_POST['dbhost'])) {
+
+echo "<pre>".print_r($_POST, true)."</pre>";
+die();
 
   $includesDir = str_replace('install', 'includes/', __DIR__);
   $amsConfigSource='<?php
@@ -28,6 +33,13 @@ if (isset($_POST['dbhost'])) {
     define (\'AMS_SEO_URL\', AMS_DOMAIN.\''.$_POST['seovalue'].'\');
     define (\'AMS_SITE_NAME\', \''.$_POST['sitename'].'\');
     ';
+
+    // if(){
+    //
+    // }else{
+    //
+    // }
+
 
   $configFile = $includesDir . 'config.php';
 
@@ -57,10 +69,10 @@ if (isset($_POST['dbhost'])) {
       $st = $conn->prepare ( $sql );
       $installed = $st->execute();
       } catch (PDOException $e) {
-          die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
+        die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
         return "$pd DataBase Error:<br>".$e->getMessage().'</p>';
       } catch (Exception $e) {
-          die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
+        die("$pd DataBase Error:<br>".$e->getMessage().'</p>');
         return "$pd General Error: <br>".$e->getMessage().'</p>';
       }
       $conn = null;
@@ -74,29 +86,90 @@ if (isset($_POST['dbhost'])) {
     }
   print_r(installDB($DB_DSN, $DB_USERNAME,$DB_PASSWORD));
 
-  $domain = $_SERVER['HTTP_HOST'];
-  $docRoot = realpath($_SERVER['DOCUMENT_ROOT']);
-  $dirRoot = __DIR__;
-  $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
-  $urlDir = str_replace('install', '',str_replace($docRoot, '', $dirRoot));
-  $urlDir = str_replace('\\', '/',$urlDir);
-  $rootDir = str_replace('install', '',$dirRoot);
-  $site_path = $protocol.$domain.$urlDir;
-  unlink('install.sql');
-  unlink(__FILE__);
-  rmdir(__DIR__);
+
+  // unlink('install.sql');
+  // unlink(__FILE__);
+  // rmdir(__DIR__);
   header('Location: ../');
 
 } else {
-  echo "<form name=\"Config Creation\" method=\"post\" action=\"".$PHP_SELF."\">";
-  echo "Database Host: <input type=\"text\" name=\"dbhost\" value=\"localhost\"><br>";
-  echo "Database Name: <input type=\"text\" name=\"dbname\" value=\"sample1\"><br>";
-  echo "Database User: <input type=\"text\" name=\"dbuser\" value=\"user1\"><br>";
-  echo "Database Pass: <input type=\"password\" name=\"dbpass\" value=\"password1\"><br>";
-  echo "Website Root Folder: <input type=\"text\" name=\"seovalue\" value=\"/\"><br>";
-  echo "Site Name: <input type=\"text\" name=\"sitename\" value=\"Comapny Name\"><br>";
-  echo "<input type=\"submit\" value=\"Create Config\"><input type=\"reset\" value=\"Reset\">";
-  echo "</form>";
+
+
+?>
+
+<script>
+  function swapConfig(x) {
+    var radioEls = document.getElementsByName(x.name);
+    for(i = 0 ; i < radioEls.length; i++){
+      document.getElementById(radioEls[i].id.concat("Settings")).style.display="none";
+    }
+    document.getElementById(x.id.concat("Settings")).style.display="initial";
+  }
+</script>
+<form name="Config Creation" method="post" action="">
+
+
+  <fieldset>
+    <legend>MySQL Database Configuration</legend>
+
+      <label>Database Host:
+        <input type="text" name="dbhost" id="dbhost" value="localhost">
+      </label>
+
+      <label>Database Name:
+        <input type="text" name="dbname" value="sample1">
+      </label>
+
+      <label>Database User:
+        <input type="text" name="dbuser" value="user1">
+      </label>
+
+      <label>Database Pass:
+        <input type="password" name="dbpass" value="password1">
+      </label>
+
+      <label>Website Root Folder:
+        <input type="text" name="seovalue" value="/">
+      </label>
+
+      <label>Site Name:
+        <input type="text" name="sitename" value="Comapny Name">
+      </label>
+
+</fieldset>
+  <fieldset>
+    <legend>Url and Domain Configuration</legend>
+    <p>
+      <label>Production
+        <input type="radio" onchange="swapConfig(this)" name="urlOptions" id="production" checked="checked" />
+      </label>
+      <label>
+        Development
+        <input type="radio" onchange="swapConfig(this)" name="urlOptions" id="development" />
+      </label>
+    </p>
+    <div id="productionSettings">
+      Production Settings
+      <p>
+        <label>Production
+          <input type="text" name="p1" value="/">
+        </label>
+      <p/>
+    </div>
+    <div id="developmentSettings" style="display:none">
+      <br/>Development Settings
+      <p>
+        <label>
+          Developent
+          <input type="text" name="d1" value="/">
+        </label>
+      <p/>
+    </div>
+  </fieldset>
+  <input type="submit" value="Create Config"><input type="reset" value="Reset">
+</form>
+
+  <?php
 }
 
 

@@ -51,9 +51,9 @@ Class blogController Extends baseController {
   public function prime(){
     $this->aReg->template->blog_heading = 'This is currently being built and worked on and the editor will only load for specific users.';
     $this->aReg->lastCSS = array(
-      PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/dashboard.css' />"
-      ,PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/extra.css' />"
-      //,PHP_EOL."<link rel ='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/carousel.css' />"
+      PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/dashboard.css' />"
+      ,PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/extra.css' />"
+      //,PHP_EOL."<link rel ='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/carousel.css' />"
     );
     /**
      * @see blogIndex.php
@@ -110,7 +110,7 @@ Class blogController Extends baseController {
         $NewlastCSS = $this->aReg->lastCSS;
         $ckeditorCSS = PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."ckeditor/css/neo.css' />";
         $extraCSS = PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."ckeditor/css/extra.css' />";
-        $dashcss = PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/dashboard.css' />";
+        $dashcss = PHP_EOL."<link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/dashboard.css' />";
         array_push($NewlastCSS, $ckeditorCSS, $extraCSS);
         $this->aReg->lastCSS = $NewlastCSS;
         $this->aReg->template->show('editor');

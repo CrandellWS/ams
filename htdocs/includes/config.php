@@ -44,13 +44,6 @@ class amsConfig {
     public $DB_PASSWORD = 'password1';
     public $DB_DSN;
 
-
-    //Template configurations
-    //Largly unused at this point
-    public $ADMIN_TEMPLATE = 'base';
-    public $SITE_TEMPLATE = 'base';
-    public $TEMPLATE_PATH = 'templates';
-
     /**
      * new creates a db object
      * should be changed
@@ -59,6 +52,12 @@ class amsConfig {
         $this->DB_DSN = 'mysql:host='.$this->DB_HOST.';dbname='.$this->DB_DATABASE;
     }
 }
+
+// if (!function_exists('array_column')) {
+//   die('array_column does not exist.');
+//   // See Ben Ramsey <http://benramsey.com> OR USE PHP 5.5
+// }
+
 
 /**
  * AMS_SEO_URL is to be used to control the urls
@@ -69,5 +68,50 @@ class amsConfig {
  * @var string
 */
 //define ('AMS_SEO_URL', $protocol.$domain.'/ams/');
-define ('AMS_SEO_URL', AMS_DOMAIN.'/');
+
+
+// $protocol = ;
+// define ('AMS_URL',
+// isset($_SERVER["HTTPS"]) ? 'https://' : 'http://'.'192.168.0.8/');
+define ('AMS_URL', '//'.'192.168.0.8/');
+define ('AMS_SEO_URL', AMS_URL);
+define( "PREFERED_PROTOCOL", "http:" );
+
 define ('AMS_SITE_NAME', 'Company Name');
+
+define( "TEMPLATE_PATH", "templates" );
+define( "TEMPLATE", "base" );
+
+define( "DEVELOPMENT_ENVIRONMENT", true);
+
+
+if (DEVELOPMENT_ENVIRONMENT) {
+ error_reporting(E_ALL);
+ ini_set("display_errors","On");
+ ini_set("log_errors", "On");
+} else {
+ error_reporting(E_ALL);
+ ini_set("display_errors","Off");
+ ini_set("log_errors", "On");
+}
+
+
+if (!function_exists('array_column')) {
+  die('array_column does not exist.');
+  // See Ben Ramsey <http://benramsey.com> OR USE PHP 5.5
+}
+
+// $domain = $_SERVER['HTTP_HOST'];
+// $docRoot = realpath($_SERVER['DOCUMENT_ROOT']);
+// $dirRoot = __DIR__;
+/**
+ * @todo convert ssl to configurable across whole application
+ */
+// $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+// $urlDir = str_replace('includes', '',str_replace($docRoot, '', $dirRoot));
+// $urlDir = str_replace('\\', '/',$urlDir);
+// $rootDir = str_replace('includes', '',$dirRoot);
+// $site_path = $protocol.$domain.$urlDir;
+// define ('AMS_URL', $site_path);
+// define ('AMS_DOMAIN', $protocol.$domain);
+// define ('AMS_ROOT', $rootDir);

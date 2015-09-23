@@ -22,22 +22,22 @@ Class primeController Extends baseController {
             if ($loggedIn === true) {
               $this->aReg->lastCSS = array(
                   "
-                  <link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/dashboard.css?v2' />"
+                  <link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/dashboard.css?v2' />"
                   ,"
-                  <link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/extra.css?v2' />"
+                  <link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/extra.css?v2' />"
                   ,"
-                  <link rel ='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/carousel.css?v4' />"
+                  <link rel ='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/carousel.css?v4' />"
 
                   );
                 $this->aReg->template->show('prime');
             } else {
               $this->aReg->lastCSS = array(
                 "
-                <link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/dashboard.css?v2' />"
+                <link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/dashboard.css?v2' />"
                 ,"
-                <link rel='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/extra.css?v2' />"
+                <link rel='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/extra.css?v2' />"
                 ,"
-                <link rel ='stylesheet' type='text/css' href='".AMS_URL."templates/base/static/src/css/carousel.css?v4' />"
+                <link rel ='stylesheet' type='text/css' href='".AMS_URL.TEMPLATE_PATH.DS.TEMPLATE."/static/src/css/carousel.css?v4' />"
 
                 );
                 $this->aReg->template->show('prime');

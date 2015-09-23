@@ -40,7 +40,6 @@ if (!function_exists('array_column')) {
   // See Ben Ramsey <http://benramsey.com> OR USE PHP 5.5
 }
 
-ob_start();
 $domain = $_SERVER['HTTP_HOST'];
 $docRoot = realpath($_SERVER['DOCUMENT_ROOT']);
 $dirRoot = __DIR__;

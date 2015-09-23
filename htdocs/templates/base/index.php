@@ -83,7 +83,7 @@ if(array_shift((explode(".",$_SERVER['HTTP_HOST']))) === 'www'){$www = 'www.';} 
         echo '        <script type="text/javascript" src="'.AMS_URL.$JS.'"></script>'.PHP_EOL;
       } else if(pathinfo($JS)['extension']==='php'){
         echo '        <script>'.PHP_EOL;
-        include AMS_ROOT.$JS;
+        include AMSDIR_BASE.$JS;
         echo '        </script>'.PHP_EOL;
       } else {
         //there was not a file extension
@@ -120,8 +120,8 @@ if(array_shift((explode(".",$_SERVER['HTTP_HOST']))) === 'www'){$www = 'www.';} 
 {
   "@context": "http://schema.org",
   "@type": "LocalBusiness",
-  "url" : "<?php   echo AMS_SEO_URL; ?>",
-  "logo" : "<?php   echo AMS_URL; ?>templates/base/static/src/img/logo_584x150.png",
+  "url" : "<?php   echo PREFERED_PROTOCOL.AMS_SEO_URL; ?>",
+  "logo" : "<?php   echo PREFERED_PROTOCOL.AMS_URL.TEMPLATE_PATH.DS.TEMPLATE; ?>/static/src/img/logo_584x150.png",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "City",
