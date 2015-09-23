@@ -11,6 +11,9 @@
 
 function updateValues(caller, className){
   callerValue = caller.value;
+  if(callerValue !== ''){
+    callerValue = callerValue.concat('/');
+  }
   classEls=document.getElementsByClassName(className);  // Find the elements
   for(var i = 0; i < classEls.length; i++){
     classEls[i].innerText=callerValue;    // Change the content
@@ -21,6 +24,7 @@ function updateValues(caller, className){
 label{
   display:inline-block;
   width:100%;
+  border: 1px dotted #ccc;
 }
 
 input{
@@ -142,13 +146,20 @@ fieldset{
             </fieldset>
             <div class="clearSpace"></div>
             <fieldset>
-              <legend>Url and Domain Configuration</legend>
-              <label style="display:block">
-                <span style="display:block; "><input style="display:inline-block" type="radio" onchange="swapConfig(this)" name="urlOptions" id="production" checked="checked" value="production"/> Production</span>
-              </label>
-              <label style="display:block">
-                  <span style="display:block"><input style="display:inline-block" type="radio" onchange="swapConfig(this)" name="urlOptions" id="development" value="development"/> Development</span>
-              </label>
+              <fieldset>
+                <legend>Url and Domain Configuration</legend>
+                <div class="inLabel">
+                  <span class="inBlockRight">
+                    <label><input type="radio" onchange="swapConfig(this)" name="urlOptions" id="production" checked="checked" value="production"/> Production</label>
+                  </span>
+                  <span class="inBlockLeft">
+                    <label><input type="radio" onchange="swapConfig(this)" name="urlOptions" id="development" value="development"/> Development</label>
+                  </span>
+                  <span class="blockOfHid"><p class="width100"></p></span>
+                </div>
+              </fieldset>
+
+
               <div class="clearSpace"></div>
               <div id="productionSettings">
                 <fieldset>
@@ -172,13 +183,14 @@ fieldset{
                           <input class="width100" type="text" name="proDomain" placeholder="localhost" value="locahost" onchange="updateValues(this, 'domain')">
                       </span>
                   </div>
-                  <span class="text-center width100">(Do Not Include http:// or https://)</span>
+                  <span class="text-center width100">Do Not Include http:// or https://</span><br/>
+                  <span class="text-center width100">Do Not Include Trailing /</span>
                 </label>
                 <div class="clearSpace"></div>
                 <label>AMS Url Root Directory:
                   <div class="inLabel">
-                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span></span>
-                      <span class="inBlockLeft">/</span>
+                      <span class="inBlockRight">/</span>
+                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost/</span></span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="amsFolder" placeholder="ams" value="" onchange="updateValues(this, 'amsFolder')">
                       </span>
@@ -188,7 +200,8 @@ fieldset{
                 <div class="clearSpace"></div>
                 <label>SEO Root Folder:
                   <div class="inLabel">
-                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span>/</span>
+                      <span class="inBlockRight"></span>
+                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost/</span></span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="seoFolder" placeholder="ams" value="">
                       </span>
@@ -199,7 +212,7 @@ fieldset{
                 <div class="clearSpace"></div>
                 <label>Template Folder:
                   <div class="inLabel">
-                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost</span>/<span class="amsFolder"></span>/</span>
+                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost/</span><span class="amsFolder"></span></span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="templateFolder" placeholder="templates" value="">
                       </span>
