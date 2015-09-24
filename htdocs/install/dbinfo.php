@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors','On');
 if (isset($_POST['dbhost'])) {
 
-preg_match( '/^[^-][a-z0-9-]{0,63}([^-]\.([a-z]{0,9}))?(;port=[0-9]{2,6})?$/i', $_POST['dbhost'], $matches);
+preg_match( '/^((?!-)[a-z0-9-]{1,63}(?<!-)(\.){0,1})+([a-z]{0,9})(?<!\.)((;port=){1}[0-9]{2,6}){0,1}$/i', $_POST['dbhost'], $matches);
 echo "<pre>".print_r($matches, true)."</pre>";
 
 die();
@@ -100,7 +100,7 @@ die();
                 <span class="inBlockRight"></span>
                 <span class="inBlockLeft"></span>
                 <span class="blockOfHid">
-                    <input class="width100" type="text" name="dbpass" placeholder="password1" value="password1">
+                    <input class="width100" type="password" name="dbpass" placeholder="password1" value="password1">
                 </span>
             </div>
           </label>
