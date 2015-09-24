@@ -1,88 +1,6 @@
 
-<script>
-  function swapConfig(x) {
-    var radioEls = document.getElementsByName(x.name);
-    for(i = 0 ; i < radioEls.length; i++){
-      document.getElementById(radioEls[i].id.concat("Settings")).style.display="none";
-    }
-    document.getElementById(x.id.concat("Settings")).style.display="initial";
-  }
-
-
-function updateValues(caller, className){
-  callerValue = caller.value;
-  if(callerValue !== ''){
-    callerValue = callerValue.concat('/');
-  }
-  classEls=document.getElementsByClassName(className);  // Find the elements
-  for(var i = 0; i < classEls.length; i++){
-    classEls[i].innerText=callerValue;    // Change the content
-  }
-}
-</script>
-<style>
-label{
-  display:inline-block;
-  width:100%;
-  border: 1px dotted #ccc;
-}
-
-input{
-  display:block;
-}
-
-fieldset{
-  display:block;
-}
-
-.wrap {
-  text-align: center;
-}
-
-.outer {
-  display: inline-block;
-  margin: 0 auto;
-  min-width: 300px;
-}
-
-.inner {
-  text-align: left;
-}
-
-.clearspace{
-  padding-top: 1em;
-  clear:both;
-}
-
-.inLabel{
-  overflow:hidden;
-  background: #ccc;
-}
-
-.inBlockRight{
-  float: right;
-  display:inline-block;
-}
-
-.inBlockLeft{
-  float: left;
-  display:inline-block;
-}
-
-.blockOfHid{
-  display: block;
-  overflow: hidden;
-}
-
-.width100{
-  width:100%;
-}
-.text-center{
-  text-align: center;
-  display:inline-block;
-}
-</style>
-
+<script src='install.js' type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href='install.css'>
 <div class='wrap'>
     <div class='outer'>
         <div class='inner'>
@@ -143,33 +61,74 @@ fieldset{
                     </span>
                 </div>
               </label>
+              <div class="clearSpace"></div>
+              <label>Site Name:
+                <div class="inLabel">
+                    <span class="inBlockRight"></span>
+                    <span class="inBlockLeft"></span>
+                    <span class="blockOfHid">
+                        <input class="width100" type="text" name="userName" placeholder="user" value="">
+                    </span>
+                </div>
+              </label>
+              <div class="clearSpace"></div>
+              <label>User Password:
+                <div class="inLabel">
+                    <span class="inBlockRight"></span>
+                    <span class="inBlockLeft"></span>
+                    <span class="blockOfHid">
+                        <input class="width100" type="password" name="userPassword" placeholder="password" value="">
+                    </span>
+                </div>
+              </label>
+              <div class="clearSpace"></div>
+              <label>User Email:
+                <div class="inLabel">
+                    <span class="inBlockRight"></span>
+                    <span class="inBlockLeft"></span>
+                    <span class="blockOfHid">
+                        <input class="width100" type="email" name="userEmail" placeholder="user@ams.localhost" value="">
+                    </span>
+                </div>
+              </label>
             </fieldset>
             <div class="clearSpace"></div>
             <fieldset>
+              <legend>Url and Domain Configuration</legend>
               <fieldset>
-                <legend>Url and Domain Configuration</legend>
+                <legend>Configuration Type</legend>
                 <div class="inLabel">
                   <span class="inBlockRight">
-                    <label><input type="radio" onchange="swapConfig(this)" name="urlOptions" id="production" checked="checked" value="production"/> Production</label>
+                    <label>
+                      <input type="radio" onchange="swapConfig(this)" name="urlOptions" id="production" checked="checked" value="production"/>
+                      <span class="sm-lr-pad"> Production </span>
+                    </label>
                   </span>
                   <span class="inBlockLeft">
-                    <label><input type="radio" onchange="swapConfig(this)" name="urlOptions" id="development" value="development"/> Development</label>
+                    <label>
+                      <input type="radio" onchange="swapConfig(this)" name="urlOptions" id="development" value="development"/>
+                      <span class="sm-lr-pad"> Development </span>
+                    </label>
                   </span>
                   <span class="blockOfHid"><p class="width100"></p></span>
                 </div>
               </fieldset>
-
-
               <div class="clearSpace"></div>
               <div id="productionSettings">
                 <fieldset>
                   <legend>Prefered Protocol</legend>
                     <div class="inLabel">
                       <span class="inBlockRight">
-                        <label><input type="radio" name="preferedProtocol" id="https" value="https://" onchange="updateValues(this, 'HtVal')" /> https:// </label>
+                        <label>
+                          <input type="radio" name="preferedProtocol" id="https" value="https://" onchange="updateValues(this, 'HtVal')" />
+                          <span class="sm-lr-pad"> https:// </span>
+                        </label>
                       </span>
                       <span class="inBlockLeft">
-                        <label ><input type="radio" name="preferedProtocol" id="http" value="http://" onchange="updateValues(this, 'HtVal')" checked="checked" /> http:// </label>
+                        <label>
+                          <input type="radio" name="preferedProtocol" id="http" value="http://" onchange="updateValues(this, 'HtVal')" checked="checked" />
+                          <span class="sm-lr-pad"> http:// </span>
+                        </label>
                       </span>
                       <span class="blockOfHid"><p class="width100"></p></span>
                   </div>
@@ -177,25 +136,26 @@ fieldset{
                 <div class="clearSpace"></div>
                 <label>Domain:
                   <div class="inLabel">
-                      <span class="inBlockRight">/</span>
+                      <span class="inBlockRight"></span>
                       <span class="inBlockLeft HtVal">http://</span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="proDomain" placeholder="localhost" value="locahost" onchange="updateValues(this, 'domain')">
                       </span>
                   </div>
-                  <span class="text-center width100">Do Not Include http:// or https://</span><br/>
-                  <span class="text-center width100">Do Not Include Trailing /</span>
+                  <span class="text-center width100"><span class="sm-lr-pad">Do Not Include http:// or https://</span></span><br/>
+                  <span class="text-center width100"><span class="sm-lr-pad">Do Not Include Trailing /</span></span>
                 </label>
                 <div class="clearSpace"></div>
                 <label>AMS Url Root Directory:
                   <div class="inLabel">
-                      <span class="inBlockRight">/</span>
-                      <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost/</span></span>
+                      <span class="inBlockRight"></span>
+                      <span class="inBlockLeft"><span class="sm-lr-pad"><span class="HtVal">http://</span><span class="domain">locahost/</span></span></span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="amsFolder" placeholder="ams" value="" onchange="updateValues(this, 'amsFolder')">
                       </span>
                   </div>
-                  <span class="text-center width100">(blank if using root directoy)</span>
+                  <span class="text-center width100"><span class="sm-lr-pad">Leave Blank if Using Root Directoy</span></span><br/>
+                  <span class="text-center width100"><span class="sm-lr-pad">index.php?a= if No mod_rewrite</span></span>
                 </label>
                 <div class="clearSpace"></div>
                 <label>SEO Root Folder:
@@ -206,12 +166,13 @@ fieldset{
                           <input class="width100" type="text" name="seoFolder" placeholder="ams" value="">
                       </span>
                   </div>
-                  <span class="text-center width100">(blank if using root directoy)</span>
+                  <span class="text-center width100"><span class="sm-lr-pad">Leave Blank if Using Root Directoy</span></span>
 
                 </label>
                 <div class="clearSpace"></div>
                 <label>Template Folder:
                   <div class="inLabel">
+                      <span class="inBlockRight">/</span>
                       <span class="inBlockLeft"><span class="HtVal">http://</span><span class="domain">locahost/</span><span class="amsFolder"></span></span>
                       <span class="blockOfHid">
                           <input class="width100" type="text" name="templateFolder" placeholder="templates" value="">
@@ -229,6 +190,19 @@ fieldset{
               </div>
               <div class="clearSpace"></div>
             </fieldset>
+            <div class="clearSpace"></div>
+            <fieldset>
+              <legend>Display Errors</legend>
+              <div class="inLabel">
+                <span class="inBlockRight">
+                  <label><span class="sm-lr-pad"><input type="radio" name="displayErrors" id="On" value="On" checked="checked" /> On </span></label>
+                </span>
+                <span class="inBlockLeft">
+                  <label><span class="sm-lr-pad"><input type="radio" name="displayErrors" id="Off" value="Off" /> Off </span></label>
+                </span>
+                <span class="blockOfHid"><p class="width100"></p></span>
+              </div>
+            </fieldset>
             <input type="submit" value="Create Config"><input type="reset" value="Reset">
           </form>
         </div>
@@ -242,6 +216,11 @@ echo '<pre>';
 
 print_r($_POST);
 
+echo '</pre>';
+
+echo '<pre>';
+if($_POST[seoFolder] !== '')
+var_dump($_POST[seoFolder]);
 echo '</pre>';
 
 echo '<pre>';

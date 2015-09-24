@@ -1,0 +1,57 @@
+label{
+  display:inline-block;
+  width:100%;
+  border: 1px dotted #ccc;
+}
+
+.wrap {
+  text-align: center;
+}
+
+.outer {
+  display: inline-block;
+  margin: 0 auto;
+  min-width: 300px;
+}
+
+.inner {
+  text-align: left;
+}
+
+.clearspace{
+  padding-top: 1em;
+  clear:both;
+}
+
+.inLabel{
+  overflow:hidden;
+  background: #ccc;
+}
+
+.inBlockRight{
+  float: right;
+  display:inline-block;
+}
+
+.inBlockLeft{
+  float: left;
+  display:inline-block;
+}
+
+.blockOfHid{
+  display: block;
+  overflow: hidden;
+}
+
+.width100{
+  width:100%;
+}
+.text-center{
+  text-align: center;
+  display:inline-block;
+}
+
+.sm-lr-pad{
+  /*padding-left: 1em;*/
+  padding-right: 1em;
+}
